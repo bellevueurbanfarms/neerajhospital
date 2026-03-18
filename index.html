@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Neeraj Hospital — Orthopedic Centre of Excellence</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0D1B2A;
+    --navy-mid: #1C3252;
+    --teal: #1E7A8C;
+    --teal-light: #2BA8BF;
+    --gold: #C8973A;
+    --gold-pale: #F5E8CB;
+    --cream: #FAF8F3;
+    --white: #FFFFFF;
+    --text: #1A1A2E;
+    --muted: #5A6478;
+    --border: rgba(0,0,0,0.08);
+    --ff-display: 'Playfair Display', Georgia, serif;
+    --ff-body: 'DM Sans', sans-serif;
+    --transition: 0.35s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--ff-body); color: var(--text); background: var(--cream); overflow-x: hidden; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem 5%;
+    background: rgba(13,27,42,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(200,151,58,0.25);
+  }
+  .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .nav-logo-icon {
+    width: 40px; height: 40px; background: var(--gold);
+    border-radius: 8px; display: grid; place-items: center; flex-shrink: 0;
+  }
+  .nav-logo-icon svg { width: 22px; height: 22px; fill: var(--navy); }
+  .nav-logo-text { color: var(--white); }
+  .nav-logo-text .name { font-family: var(--ff-display); font-size: 1.1rem; font-weight: 700; display: block; line-height: 1; }
+  .nav-logo-text .sub { font-size: 0.7rem; color: var(--gold); letter-spacing: 0.1em; text-transform: uppercase; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.85rem; font-weight: 500; letter-spacing: 0.03em; transition: color var(--transition); }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta {
+    background: var(--gold); color: var(--navy); padding: 0.55rem 1.4rem;
+    border-radius: 50px; font-size: 0.85rem; font-weight: 500; text-decoration: none;
+    transition: background var(--transition), transform var(--transition);
+  }
+  .nav-cta:hover { background: #e0aa44; transform: translateY(-1px); }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    background: url('https://neerajhospital.in/wp-content/uploads/2025/09/DSC05025-2048x1153.jpg') center center / cover no-repeat;
+    display: flex; align-items: center;
+    padding: 120px 5% 80px;
+    position: relative; overflow: hidden;
+  }
+  .hero-pattern {
+    position: absolute; inset: 0;
+    background: linear-gradient(100deg, rgba(13,27,42,0.88) 0%, rgba(13,27,42,0.72) 55%, rgba(13,27,42,0.3) 100%);
+  }
+  .hero-circle {
+    position: absolute; right: 0; top: 0; bottom: 0; width: 45%;
+    background: linear-gradient(to left, rgba(30,122,140,0.12), transparent);
+    pointer-events: none;
+  }
+  .hero-content { max-width: 680px; position: relative; z-index: 1; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(200,151,58,0.15); border: 1px solid rgba(200,151,58,0.4);
+    color: var(--gold); padding: 0.4rem 1rem; border-radius: 50px;
+    font-size: 0.78rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.6s ease both;
+  }
+  .hero-badge::before { content: ''; width: 6px; height: 6px; background: var(--gold); border-radius: 50%; }
+  h1 {
+    font-family: var(--ff-display); color: var(--white);
+    font-size: clamp(2.4rem, 5vw, 3.8rem); font-weight: 700; line-height: 1.15;
+    margin-bottom: 1.25rem;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+  h1 em { color: var(--teal-light); font-style: normal; }
+  .hero-desc {
+    color: rgba(255,255,255,0.68); font-size: 1.05rem; line-height: 1.8;
+    margin-bottom: 2.5rem; max-width: 520px;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+  .hero-stats {
+    display: flex; gap: 2.5rem; margin-top: 3.5rem; flex-wrap: wrap;
+    animation: fadeUp 0.6s 0.4s ease both;
+  }
+  .stat { border-left: 2px solid var(--gold); padding-left: 1rem; }
+  .stat-num { font-family: var(--ff-display); font-size: 1.9rem; font-weight: 700; color: var(--white); line-height: 1; }
+  .stat-label { font-size: 0.78rem; color: rgba(255,255,255,0.55); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 0.25rem; }
+
+  /* ── SECTIONS ── */
+  section { padding: 90px 5%; }
+  .section-tag { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--teal); margin-bottom: 0.6rem; }
+  .section-title { font-family: var(--ff-display); font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 700; color: var(--navy); line-height: 1.2; margin-bottom: 1rem; }
+  .section-title span { color: var(--teal); }
+  .section-sub { color: var(--muted); font-size: 1rem; line-height: 1.7; max-width: 540px; margin-bottom: 3rem; }
+
+  /* ── ABOUT ── */
+  #about { background: var(--white); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+  .about-visual {
+    position: relative; border-radius: 20px; overflow: hidden;
+    aspect-ratio: 4/5;
+    background: linear-gradient(135deg, var(--navy) 0%, var(--teal) 100%);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .about-visual-inner { text-align: center; color: var(--white); padding: 2rem; }
+  .about-visual-inner svg { width: 100px; height: 100px; opacity: 0.7; margin-bottom: 1.5rem; }
+  .about-visual-inner p { font-family: var(--ff-display); font-size: 1.4rem; line-height: 1.5; opacity: 0.9; }
+  .about-visual-badge {
+    position: absolute; bottom: 1.5rem; left: 1.5rem; right: 1.5rem;
+    background: rgba(255,255,255,0.95); border-radius: 12px; padding: 1rem 1.25rem;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .ab-icon { width: 42px; height: 42px; background: var(--gold-pale); border-radius: 10px; display: grid; place-items: center; flex-shrink: 0; }
+  .ab-icon svg { width: 22px; height: 22px; fill: var(--gold); }
+  .ab-text strong { display: block; font-size: 0.9rem; color: var(--navy); font-weight: 500; }
+  .ab-text span { font-size: 0.78rem; color: var(--muted); }
+  .about-features { display: flex; flex-direction: column; gap: 1.25rem; margin-top: 2rem; }
+  .af-item { display: flex; align-items: flex-start; gap: 14px; }
+  .af-dot { width: 28px; height: 28px; background: rgba(30,122,140,0.1); border-radius: 50%; display: grid; place-items: center; flex-shrink: 0; margin-top: 2px; }
+  .af-dot::after { content: ''; width: 8px; height: 8px; background: var(--teal); border-radius: 50%; }
+  .af-item p { font-size: 0.95rem; color: var(--muted); line-height: 1.6; }
+  .af-item strong { color: var(--navy); }
+
+  /* ── SERVICES ── */
+  #services { background: var(--cream); }
+  .services-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 1.5rem; }
+  .service-card {
+    background: var(--white); border-radius: 16px; padding: 1.75rem;
+    border: 1px solid var(--border);
+    transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+    cursor: default;
+  }
+  .service-card:hover { transform: translateY(-5px); box-shadow: 0 16px 40px rgba(13,27,42,0.1); border-color: rgba(30,122,140,0.3); }
+  .sc-icon { width: 52px; height: 52px; background: linear-gradient(135deg, rgba(30,122,140,0.12), rgba(30,122,140,0.05)); border-radius: 14px; display: grid; place-items: center; margin-bottom: 1.1rem; }
+  .sc-icon svg { width: 26px; height: 26px; fill: var(--teal); }
+  .service-card h3 { font-family: var(--ff-display); font-size: 1.1rem; font-weight: 600; color: var(--navy); margin-bottom: 0.5rem; }
+  .service-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.65; }
+
+  /* ── SURGERIES ── */
+  #surgeries { background: var(--navy); }
+  #surgeries .section-title { color: var(--white); }
+  #surgeries .section-tag { color: var(--teal-light); }
+  #surgeries .section-sub { color: rgba(255,255,255,0.6); }
+  .surgery-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.2rem; }
+  .surgery-item {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px; padding: 1.4rem 1.5rem;
+    display: flex; align-items: center; gap: 14px;
+    transition: background var(--transition), border-color var(--transition);
+  }
+  .surgery-item:hover { background: rgba(30,122,140,0.15); border-color: rgba(30,122,140,0.4); }
+  .si-num { font-family: var(--ff-display); font-size: 1.4rem; font-weight: 700; color: var(--gold); min-width: 36px; }
+  .si-text h4 { color: var(--white); font-size: 0.95rem; font-weight: 500; margin-bottom: 0.2rem; }
+  .si-text p { color: rgba(255,255,255,0.5); font-size: 0.8rem; }
+
+  /* ── WHY US ── */
+  #why { background: var(--white); }
+  .why-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.5rem; }
+  .why-card {
+    text-align: center; padding: 2rem 1.5rem;
+    border: 1px solid var(--border); border-radius: 16px;
+    transition: border-color var(--transition), transform var(--transition);
+  }
+  .why-card:hover { border-color: var(--teal); transform: translateY(-4px); }
+  .why-icon { width: 60px; height: 60px; margin: 0 auto 1rem; background: var(--gold-pale); border-radius: 50%; display: grid; place-items: center; }
+  .why-icon svg { width: 28px; height: 28px; fill: var(--gold); }
+  .why-card h3 { font-family: var(--ff-display); font-size: 1rem; color: var(--navy); margin-bottom: 0.5rem; font-weight: 600; }
+  .why-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
+
+  /* ── CONTACT ── */
+  #contact { background: linear-gradient(135deg, #0E2A45, var(--navy-mid)); padding: 90px 5%; }
+  .contact-info { display: flex; flex-direction: column; gap: 1.5rem; }
+  .ci-item {
+    display: flex; align-items: flex-start; gap: 16px;
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 14px; padding: 1.25rem 1.4rem;
+  }
+  .ci-icon { width: 44px; height: 44px; background: rgba(30,122,140,0.3); border-radius: 10px; display: grid; place-items: center; flex-shrink: 0; }
+  .ci-icon svg { width: 22px; height: 22px; fill: var(--teal-light); }
+  .ci-content label { display: block; font-size: 0.72rem; color: rgba(255,255,255,0.45); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.3rem; }
+  .ci-content a, .ci-content p { color: var(--white); font-size: 0.95rem; text-decoration: none; line-height: 1.6; }
+  .ci-content a:hover { color: var(--gold); }
+  /* ── FOOTER ── */
+  footer {
+    background: #050e18; color: rgba(255,255,255,0.45);
+    text-align: center; padding: 2rem 5%;
+    font-size: 0.82rem; border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  footer span { color: var(--gold); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .about-visual { aspect-ratio: 3/2; }
+    .nav-links { display: none; }
+    .hero-stats { gap: 1.5rem; }
+  }
+  @media (max-width: 600px) {
+    nav { padding: 1rem 4%; }
+    section { padding: 60px 4%; }
+  }
+
+  /* Smooth reveal on scroll */
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">
+    <div class="nav-logo-icon">
+      <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2zm1 14h-2v-5h-2V9h2V7h2v2h2v2h-2v5z"/></svg>
+    </div>
+    <div class="nav-logo-text">
+      <span class="name">Neeraj Hospital</span>
+      <span class="sub">Orthopedic Excellence</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#surgeries">Surgeries</a></li>
+    <li><a href="#why">Why Us</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="tel:+918059109613" class="nav-cta">📞 +91 80591 09613</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-pattern"></div>
+  <div class="hero-circle"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Ellenabad's Trusted Orthopedic Centre</div>
+    <h1>Advanced Bone & Joint Care <em>You Can Trust</em></h1>
+    <p class="hero-desc">Neeraj Hospital delivers comprehensive orthopedic care — from sports injuries to complex joint replacements — with compassion, precision, and cutting-edge surgical expertise.</p>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">15+</div>
+        <div class="stat-label">Years Experience</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">5000+</div>
+        <div class="stat-label">Surgeries Done</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">98%</div>
+        <div class="stat-label">Patient Satisfaction</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-visual reveal">
+      <div class="about-visual-inner">
+        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><path fill="white" d="M32 4C18.7 4 8 14.7 8 28c0 8.5 4.5 16 11.2 20.4L16 56h32l-3.2-7.6C51.5 44 56 36.5 56 28 56 14.7 45.3 4 32 4zm0 6c9.9 0 18 8.1 18 18S41.9 46 32 46 14 37.9 14 28s8.1-18 18-18zm-1 6v9h-9v6h9v9h6v-9h9v-6h-9V16h-6z"/></svg>
+        <p>Dedicated to restoring movement and improving quality of life</p>
+      </div>
+      <div class="about-visual-badge">
+        <div class="ab-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 4l6 2.7V11c0 3.85-2.51 7.45-6 8.93-3.49-1.48-6-5.08-6-8.93V7.7L12 5z"/></svg>
+        </div>
+        <div class="ab-text">
+          <strong>NABH Accreditation Standard</strong>
+          <span>Following best hospital practices</span>
+        </div>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="section-tag">About Us</div>
+      <h2 class="section-title">Restoring <span>Motion</span>, Renewing Life</h2>
+      <p class="section-sub">Neeraj Hospital has been a pillar of orthopedic healthcare in Ellenabad, Sirsa district. We combine modern technology with personalised care, making quality orthopedic treatment accessible to all.</p>
+      <div class="about-features">
+        <div class="af-item">
+          <div class="af-dot"></div>
+          <p><strong>Modern Operation Theatres</strong> — equipped with advanced imaging and surgical instruments for precise outcomes.</p>
+        </div>
+        <div class="af-item">
+          <div class="af-dot"></div>
+          <p><strong>Expert Orthopedic Surgeons</strong> — experienced specialists in joint replacement, trauma, and spine care.</p>
+        </div>
+        <div class="af-item">
+          <div class="af-dot"></div>
+          <p><strong>Comprehensive Physiotherapy</strong> — dedicated rehabilitation unit for faster recovery after surgery.</p>
+        </div>
+        <div class="af-item">
+          <div class="af-dot"></div>
+          <p><strong>24/7 Emergency Orthopedic Care</strong> — round-the-clock availability for trauma and fracture emergencies.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div style="text-align:center; max-width: 600px; margin: 0 auto 3rem;">
+    <div class="section-tag reveal">Our Services</div>
+    <h2 class="section-title reveal">Comprehensive <span>Orthopedic</span> Care</h2>
+    <p class="section-sub reveal" style="margin: 0 auto;">From fracture management to advanced joint replacements, we provide the full spectrum of musculoskeletal care under one roof.</p>
+  </div>
+  <div class="services-grid">
+
+    <div class="service-card reveal">
+      <div class="sc-icon"><svg viewBox="0 0 24 24"><path d="M9.5 3H5v7H3v2h2v9h2v-9h2V3h.5zm9 0H14v3h-1v2h1v3h1V8h1V5h1V3h.5zM7 5h1v3H7z"/></svg></div>
+      <h3>Fracture Management</h3>
+      <p>Expert diagnosis and treatment of all types of fractures using modern fixation techniques including ORIF, nailing, and plating.</p>
+    </div>
+
+    <div class="service-card reveal">
+      <div class="sc-icon"><svg viewBox="0 0 24 24"><path d="M17 2H7C5.9 2 5 2.9 5 4v16c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-5 18c-.83 0-1.5-.67-1.5-1.5S11.17 17 12 17s1.5.67 1.5 1.5S12.83 20 12 20zm5-4H7V4h10v12z"/></svg></div>
+      <h3>Joint Replacement Surgery</h3>
+      <p>Total and partial knee, hip, and shoulder replacement using premium implants for lasting mobility and pain relief.</p>
+    </div>
+
+    <div class="service-card reveal">
+      <div class="sc-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg></div>
+      <h3>Arthroscopic Surgery</h3>
+      <p>Minimally invasive keyhole procedures for knee, shoulder, and ankle — shorter hospital stays and faster recovery.</p>
+    </div>
+
+    <div class="service-card reveal">
+      <div class="sc-icon"><svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9zm0 16c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7zm-1-11h2v5h-2zm0 6h2v2h-2z"/></svg></div>
+      <h3>Spine Care</h3>
+      <p>Treatment for disc herniation, spondylosis, spinal stenosis, and deformities with both surgical and non-surgical options.</p>
+    </div>
+
+    <div class="service-card reveal">
+      <div class="sc-icon"><svg viewBox="0 0 24 24"><path d="M13 2.05v2.02c3.95.49 7 3.85 7 7.93 0 3.21-1.81 6-4.72 7.28L13 17v5h5l-1.22-1.22C19.91 19.07 22 15.76 22 12c0-5.18-3.95-9.45-9-9.95zM11 2.05C5.95 2.55 2 6.82 2 12c0 3.76 2.09 7.07 5.22 8.78L6 22h5v-5l-2.28 2.28C7.81 18 6 15.21 6 12c0-4.08 3.05-7.44 7-7.93V2.05z"/></svg></div>
+      <h3>Sports Injury Treatment</h3>
+      <p>ACL/PCL tears, meniscus injuries, rotator cuff repairs, and all sports-related musculoskeletal conditions.</p>
+    </div>
+
+    <div class="service-card reveal">
+      <div class="sc-icon"><svg viewBox="0 0 24 24"><path d="M12 2a5 5 0 1 0 0 10A5 5 0 0 0 12 2zm0 12c-5.33 0-8 2.67-8 4v2h16v-2c0-1.33-2.67-4-8-4z"/></svg></div>
+      <h3>Paediatric Orthopaedics</h3>
+      <p>Specialised care for children with bone and joint conditions including clubfoot, limb deformities, and growth plate injuries.</p>
+    </div>
+
+    <div class="service-card reveal">
+      <div class="sc-icon"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/></svg></div>
+      <h3>Geriatric Orthopaedics</h3>
+      <p>Elderly-focused bone care including osteoporosis management, fragility fractures, and hip replacement for seniors.</p>
+    </div>
+
+    <div class="service-card reveal">
+      <div class="sc-icon"><svg viewBox="0 0 24 24"><path d="M17.73 12.02l3.98-3.98c.39-.39.39-1.02 0-1.41l-4.34-4.34c-.39-.39-1.02-.39-1.41 0l-3.98 3.98L8 2.29C7.8 2.1 7.55 2 7.29 2c-.25 0-.51.1-.7.29L2.25 6.63c-.39.39-.39 1.02 0 1.41l3.98 3.98L2.25 16c-.39.39-.39 1.02 0 1.41l4.34 4.34c.39.39 1.02.39 1.41 0l3.98-3.98 3.98 3.98c.2.2.45.29.71.29.26 0 .51-.1.71-.29l4.34-4.34c.39-.39.39-1.02 0-1.41l-3.99-3.98z"/></svg></div>
+      <h3>Physiotherapy & Rehab</h3>
+      <p>Post-operative and conservative rehabilitation with modern equipment, guided by certified physiotherapists.</p>
+    </div>
+
+    <div class="service-card reveal">
+      <div class="sc-icon"><svg viewBox="0 0 24 24"><path d="M19 8l-4 4h3c0 3.31-2.69 6-6 6a5.87 5.87 0 0 1-2.8-.7l-1.46 1.46A7.93 7.93 0 0 0 12 20c4.42 0 8-3.58 8-8h3l-4-4zM6 12c0-3.31 2.69-6 6-6 1.01 0 1.97.25 2.8.7l1.46-1.46A7.93 7.93 0 0 0 12 4c-4.42 0-8 3.58-8 8H1l4 4 4-4H6z"/></svg></div>
+      <h3>Trauma & Emergency Care</h3>
+      <p>24/7 emergency orthopaedic trauma services for accident victims, including complex pelvic and polytrauma cases.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- SURGERIES -->
+<section id="surgeries">
+  <div style="text-align:center; max-width: 600px; margin: 0 auto 3rem;">
+    <div class="section-tag reveal">Surgical Expertise</div>
+    <h2 class="section-title reveal">Surgical <span style="color:var(--teal-light)">Procedures</span> We Perform</h2>
+    <p class="section-sub reveal" style="margin: 0 auto;">Our experienced surgeons perform a wide range of orthopedic procedures with high precision and excellent outcomes.</p>
+  </div>
+  <div class="surgery-list">
+    <div class="surgery-item reveal">
+      <div class="si-num">01</div>
+      <div class="si-text"><h4>Total Knee Replacement (TKR)</h4><p>Primary & revision knee arthroplasty</p></div>
+    </div>
+    <div class="surgery-item reveal">
+      <div class="si-num">02</div>
+      <div class="si-text"><h4>Total Hip Replacement (THR)</h4><p>Cemented & uncemented implants</p></div>
+    </div>
+    <div class="surgery-item reveal">
+      <div class="si-num">03</div>
+      <div class="si-text"><h4>Shoulder Replacement</h4><p>Anatomical & reverse shoulder arthroplasty</p></div>
+    </div>
+    <div class="surgery-item reveal">
+      <div class="si-num">04</div>
+      <div class="si-text"><h4>ACL / PCL Reconstruction</h4><p>Arthroscopic ligament repair</p></div>
+    </div>
+    <div class="surgery-item reveal">
+      <div class="si-num">05</div>
+      <div class="si-text"><h4>Spinal Fusion & Discectomy</h4><p>TLIF, PLIF, microdiscectomy</p></div>
+    </div>
+    <div class="surgery-item reveal">
+      <div class="si-num">06</div>
+      <div class="si-text"><h4>Intramedullary Nailing</h4><p>Femur, tibia, humerus nailing</p></div>
+    </div>
+    <div class="surgery-item reveal">
+      <div class="si-num">07</div>
+      <div class="si-text"><h4>ORIF for Complex Fractures</h4><p>Open reduction & internal fixation</p></div>
+    </div>
+    <div class="surgery-item reveal">
+      <div class="si-num">08</div>
+      <div class="si-text"><h4>External Fixation</h4><p>Ilizarov & monolateral fixators</p></div>
+    </div>
+    <div class="surgery-item reveal">
+      <div class="si-num">09</div>
+      <div class="si-text"><h4>Meniscectomy & Meniscal Repair</h4><p>Arthroscopic knee procedures</p></div>
+    </div>
+    <div class="surgery-item reveal">
+      <div class="si-num">10</div>
+      <div class="si-text"><h4>Rotator Cuff Repair</h4><p>Arthroscopic & open techniques</p></div>
+    </div>
+    <div class="surgery-item reveal">
+      <div class="si-num">11</div>
+      <div class="si-text"><h4>Limb Lengthening & Deformity Correction</h4><p>Paediatric & adult deformities</p></div>
+    </div>
+    <div class="surgery-item reveal">
+      <div class="si-num">12</div>
+      <div class="si-text"><h4>Clubfoot Correction (Ponseti)</h4><p>Paediatric foot deformity treatment</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section id="why">
+  <div style="text-align:center; max-width: 600px; margin: 0 auto 3rem;">
+    <div class="section-tag reveal">Why Choose Us</div>
+    <h2 class="section-title reveal">Excellence in Every <span>Aspect</span></h2>
+    <p class="section-sub reveal" style="margin: 0 auto;">We are committed to delivering world-class orthopedic care with a patient-first philosophy.</p>
+  </div>
+  <div class="why-grid">
+    <div class="why-card reveal">
+      <div class="why-icon"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg></div>
+      <h3>Expert Surgeons</h3>
+      <p>Highly qualified orthopedic surgeons with decades of combined experience in complex cases.</p>
+    </div>
+    <div class="why-card reveal">
+      <div class="why-icon"><svg viewBox="0 0 24 24"><path d="M20 6h-2.18c.07-.44.18-.88.18-1.34C18 2.54 15.46 0 12.34 0c-1.61 0-3.11.65-4.18 1.81L12 6H6L4.59 4.59C3.59 5.5 3 6.82 3 8.25c0 2.9 2.36 5.25 5.25 5.25H11v2H7v2h4v4h2v-4h4v-2h-4v-2h2.75C18.64 13.5 21 11.15 21 8.25c0-1.43-.59-2.75-1-2.25z"/></svg></div>
+      <h3>Advanced Technology</h3>
+      <p>State-of-the-art operation theatres with C-arm, arthroscopy tower, and modern implants.</p>
+    </div>
+    <div class="why-card reveal">
+      <div class="why-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg></div>
+      <h3>24/7 Emergency</h3>
+      <p>Round-the-clock emergency orthopedic care for trauma patients and urgent cases.</p>
+    </div>
+    <div class="why-card reveal">
+      <div class="why-icon"><svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm4.24 16L12 15.45 7.77 18l1.12-4.81-3.73-3.23 4.92-.42L12 5l1.92 4.53 4.92.42-3.73 3.23L16.23 18z"/></svg></div>
+      <h3>Affordable Care</h3>
+      <p>Quality orthopedic treatment at fair, transparent prices with insurance tie-ups available.</p>
+    </div>
+    <div class="why-card reveal">
+      <div class="why-icon"><svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg></div>
+      <h3>Patient-Centred Care</h3>
+      <p>Personalised treatment plans, compassionate nursing staff, and family-friendly environment.</p>
+    </div>
+    <div class="why-card reveal">
+      <div class="why-icon"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/></svg></div>
+      <h3>Experienced Physiotherapists</h3>
+      <p>Dedicated rehabilitation team to guide you from surgery back to full, active life.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div style="max-width: 800px; margin: 0 auto;">
+    <div style="text-align:center; margin-bottom: 3rem;">
+      <div class="section-tag reveal">Get In Touch</div>
+      <h2 class="section-title reveal" style="color:var(--white);">Visit Us or <span style="color:var(--teal-light)">Call Today</span></h2>
+      <p class="section-sub reveal" style="color:rgba(255,255,255,0.6); margin: 0 auto;">Our team is ready to help. Walk in anytime or call ahead to speak with our specialists.</p>
+    </div>
+    <div class="contact-info reveal">
+      <div class="ci-item">
+        <div class="ci-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        </div>
+        <div class="ci-content">
+          <label>Address</label>
+          <p>Circular Rd, Near Balmiki Chowk, Shamshabad<br>B Block, Ellenabad, Sirsa, Haryana 125055, India</p>
+        </div>
+      </div>
+      <div class="ci-item">
+        <div class="ci-icon">
+          <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+        </div>
+        <div class="ci-content">
+          <label>Phone / WhatsApp</label>
+          <a href="tel:+918059109613">+91 80591 09613</a>
+        </div>
+      </div>
+      <div class="ci-item">
+        <div class="ci-icon">
+          <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z"/></svg>
+        </div>
+        <div class="ci-content">
+          <label>OPD Timings</label>
+          <p>Mon – Sat: 9:00 AM – 7:00 PM<br>Emergency: 24/7 Available</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 <span>Neeraj Hospital</span> — Orthopedic Centre of Excellence, Ellenabad, Sirsa, Haryana. All rights reserved.</p>
+  <p style="margin-top: 0.4rem;">Circular Rd, Near Balmiki Chowk, B Block, Ellenabad 125055 &nbsp;|&nbsp; <a href="tel:+918059109613" style="color: var(--teal-light); text-decoration: none;">+91 80591 09613</a></p>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 60);
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(r => io.observe(r));
+</script>
+</body>
+</html>
